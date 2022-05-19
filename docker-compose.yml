@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  goodreads-db:
+    container_name: goodreads-db
+    image: jmreif/mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=Testing123
+    ports:
+      - "27017:27017"
+    networks:
+      - goodreads
+    volumes:
+      - $HOME/Projects/docker/mongoBooks/data:/data/db
+      - $HOME/Projects/docker/mongoBooks/logs:/logs
+      - $HOME/Projects/docker/mongoBooks/tmp:/tmp
+  goodreads-svc1:
+    container_name: goodreads-svc1
+    image: jmreif/goodreads-svc1
+    ports:
+      - "8081:8081"
+    depends_on:
+      - goodreads-db
+    networks:
+      - goodreads
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongoadmin:Testing123@goodreads-db:27017
+      - SPRING_DATA_MONGODB_DATABASE=goodreads
+  goodreads-svc2:
+    container_name: goodreads-svc2
+    image: jmreif/goodreads-svc2
+    ports:
+      - "8080:8080"
+    depends_on:
+      - goodreads-svc1
+    networks:
+      - goodreads
+    environment:
+      - BACKEND_HOSTNAME=goodreads-svc1
+  goodreads-svc3:
+    container_name: goodreads-svc3
+    image: jmreif/goodreads-svc3
+    ports:
+      - "8082:8082"
+    depends_on:
+      - goodreads-db
+    networks:
+      - goodreads
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongoadmin:Testing123@goodreads-db:27017
+      - SPRING_DATA_MONGODB_DATABASE=goodreads
+networks:
+  goodreads:
