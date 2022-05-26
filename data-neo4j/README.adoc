@@ -16,7 +16,7 @@ In the meantime, we can trim our Neo4j data set down just a bit as a temporary s
 * Copy/paste first section of `create_goodreads.cypher` (indexes) into the input box at the top and click the `play` button icon.
 * Copy/paste the rest of the `create_goodreads.cypher` file into the input box at the top and click the `play` button icon.
 
-*Note:* If you would like to load the full 10,000 book data set, you can do so with AuraDB Pro tier for around $130/month.
+*Note:* If you would like to load the full 10,000 book data set, you can do so with AuraDB Pro tier, which costs around $130/month.
 This choice is entirely up to you.
 The data set and import statements for this are in the https://github.com/JMHReif/graph-demo-datasets/tree/main/goodreadsUCSD[graph-demo-datasets^] repository on Github.
 

@@ -1,23 +1,23 @@
 = Microservices Project: Level 6
 
-**Work In Progress!**
-
 This project is part of a series for creating microservices. In this repository, we use the following technologies:
 
 * Spring Boot
 * Java
 * REST services
 * Lombok
+* Spring Data
 * MongoDB document database
 ** loaded with Book/Author domain data
 * Docker and docker compose
-* Spring Cloud Config Server
+* Neo4j AuraDB
+** load with Book/Author/Review domain data
 
 For the domain, we loaded a publicly-available https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home?authuser=0[UCSD Book Graph dataset^] that provides books and related information.
 
 == Architecture
 
-// image::microservices-level5.png[]
+image::microservices-level6.png[]
 
 We have 4 services in this repository: `service1`, `service2`, `service3`, and `service4`. Responsibilities of each service are outlined below, followed by the changes to execution.
 
@@ -26,7 +26,7 @@ We have 4 services in this repository: `service1`, `service2`, `service3`, and `
 * Service3: backend service hosting the REST api for author data (MongoDB)
 * Service4: backend service hosting the REST api for review data (Neo4j)
 
-Each of the applications has been packaged into a Docker container, and we are using https://docs.docker.com/compose/[Docker Compose^] to run and manage the services together. With all services running in Docker containers, there were a few configuration changes needed, but the applications can communicate and pass data as before.
+Services 1, 2, and 3 have been packaged into Docker containers, and we are using https://docs.docker.com/compose/[Docker Compose^] to run and manage the services together. With all services running in Docker containers, there were a few configuration changes needed, but the applications can communicate and pass data as before. Service4 is currently run locally, but will be containerized and added to our Docker Compose setup later.
 
 == Microservices functions
 
@@ -37,21 +37,29 @@ There are a variety of reasons businesses and users might choose to develop appl
 * Maintenance simplicity (changes only affect pieces, and less likely to impact whole)
 * Shift resource load (from large instance running single monolith application, to many smaller instances hosting/coordinating microservices)
 
-// == Executing the services
+ == Executing the services
 
-// To reproduce this intro example, please follow the steps.
+ To reproduce this intro example, please follow the steps.
 
-// 1. Clone this repository
-// 2. Build each service's Docker container (note: if not on arm64 silicon chip, will need to update image names in compose file, as well).
-// 3. Execute Docker compose with `docker-compose up -d`.
-// 4. Test backing service (books): Open a command line window and execute `curl localhost:8081/db/books`.
-// 5. Test client service: Open a command line window and execute `curl localhost:8080/goodreads/books`.
-// 6. Test backing service (authors): Open a command line window and execute `curl localhost:8082/db/authors`.
-// 7. See the results of books or authors appear :)
+ 1. Clone this repository
+ 2. Build each service's Docker container (note: if not on arm64 silicon chip, will need to update image names in compose file, as well).
+ 3. Execute Docker compose with `docker-compose up -d`.
+ 4. Test backing service (books): Open a command line window and execute `curl localhost:8081/db/books`.
+ 5. Test client service: Open a command line window and execute `curl localhost:8080/goodreads/books`.
+ 6. Test backing service (authors): Open a command line window and execute `curl localhost:8082/db/authors`.
+ 7. See the results of books or authors appear :)
+
+Separately, we can test Neo4j and service4 with additional steps.
+
+8. Create a free Neo4j AuraDB instance.
+9. Load the data using the steps in the `data-neo4j` folder.
+10. Start the `service4` application from an IDE or command line.
+11. Test review backing service: Open a command line window and execute `curl localhost:8083/neo/reviews` or `curl localhost:8083/neo/reviews/178186`.
+12. See the results of reviews appear :)
 
 // == Content
 
-// * Blog post: https://jmhreif.com/blog/microservices-level5/[Microservices Level 5^]
+// * Blog post: https://jmhreif.com/blog/microservices-level6/[Microservices Level 6^]
 
 == Previous steps
 
