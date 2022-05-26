@@ -9,13 +9,13 @@ CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
 CREATE CONSTRAINT FOR (r:Review) REQUIRE r.review_id IS UNIQUE;
 
 //Load 8.5k books
-CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_8k.json") YIELD value as book
+CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_6k.json") YIELD value as book
 MERGE (b:Book {book_id: book.book_id})
 SET b += apoc.map.clean(book, ['authors'],[""]);
 //8500 Book nodes
 
 //Import initial authors for 8.5k books
-CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_7k.json") YIELD value as book
+CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_6k.json") YIELD value as book
 WITH book
 UNWIND book.authors as author
 MERGE (a:Author {author_id: author.author_id});
@@ -29,7 +29,7 @@ CALL apoc.periodic.iterate(
 );
 
 //Load Author relationships
-CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_7k.json") YIELD value as book
+CALL apoc.load.json("https://raw.githubusercontent.com/JMHReif/microservices-level6/main/data-neo4j/goodreads_books_6k.json") YIELD value as book
 WITH book
 MATCH (b:Book {book_id: book.book_id})
 WITH book, b
