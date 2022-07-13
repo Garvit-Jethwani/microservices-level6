@@ -37,7 +37,7 @@ There are a variety of reasons businesses and users might choose to develop appl
 * Maintenance simplicity (changes only affect pieces, and less likely to impact whole)
 * Shift resource load (from large instance running single monolith application, to many smaller instances hosting/coordinating microservices)
 
- == Executing the services
+== Executing the services
 
  To reproduce this intro example, please follow the steps.
 
@@ -57,9 +57,9 @@ Separately, we can test Neo4j and service4 with additional steps.
 11. Test review backing service: Open a command line window and execute `curl localhost:8083/neo/reviews` or `curl localhost:8083/neo/reviews/178186`.
 12. See the results of reviews appear :)
 
-// == Content
+== Content
 
-// * Blog post: https://jmhreif.com/blog/microservices-level6/[Microservices Level 6^]
+* Blog post: https://jmhreif.com/blog/microservices-level6/[Microservices Level 6^]
 
 == Previous steps
 
