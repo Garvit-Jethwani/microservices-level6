@@ -8,17 +8,13 @@ This folder contains steps and information for creating a free instance of Neo4j
 
 == Load the data into Neo4j
 
-Our 10,000 book data set is a bit too large for Neo4j AuraDB free tier instance size. However, the limited size is expected to upgrade in the next month or two. ;)
+Our 10,000 book data set, along with related authors and reviews, fits on a Neo4j AuraDB free tier instance, so we can follow the steps outlined below to load the data.
 
-In the meantime, we can trim our Neo4j data set down just a bit as a temporary solution.
-
-* Click on the `Query` button for the running instance to open Neo4j Browser.
+* From the https://console.neo4j.com[AuraDB console^], click on the `Query` button for the running instance to open Neo4j Browser.
 * Copy/paste first section of `create_goodreads.cypher` (indexes) into the input box at the top and click the `play` button icon.
-* Copy/paste the rest of the `create_goodreads.cypher` file into the input box at the top and click the `play` button icon.
+* Copy/paste each of the next statements from the `create_goodreads.cypher` file into the input box at the top and click the `play` button icon.
 
-*Note:* If you would like to load the full 10,000 book data set, you can do so with AuraDB Pro tier, which costs around $130/month.
-This choice is entirely up to you.
-The data set and import statements for this are in the https://github.com/JMHReif/graph-demo-datasets/tree/main/goodreadsUCSD[graph-demo-datasets^] repository on Github.
+*Note:* More info on this data set is in the https://github.com/JMHReif/graph-demo-datasets/tree/main/goodreadsUCSD[graph-demo-datasets^] repository on Github.
 
 == Verify the data
 

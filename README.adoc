@@ -1,5 +1,9 @@
 = Microservices Project: Level 6
 
+In this installment of the project, we are adding a microservice to retrieve book review data from a cloud-hosted Neo4j graph database.
+
+== Technologies
+
 This project is part of a series for creating microservices. In this repository, we use the following technologies:
 
 * Spring Boot
